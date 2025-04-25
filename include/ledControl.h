@@ -1,24 +1,20 @@
 #ifndef LEDCONTROL_H
 #define LEDCONTROL_H
 
-#include <Arduino.h>
+#include <Arduino.h>  // Include Arduino core library for pinMode and analogWrite
 
-const int LED_PIN = 5;
-const int PWM_CHANNEL = 0;
-const int PWM_FREQ = 5000;
-const int PWM_RESOLUTION = 8;
+#define LED_PIN 23  // GPIO pin for the LED
 
 void setupLED() {
-    ledcSetup(PWM_CHANNEL, PWM_FREQ, PWM_RESOLUTION);
-    ledcAttachPin(LED_PIN, PWM_CHANNEL);
+    pinMode(LED_PIN, OUTPUT);  // Set LED pin as an output
 }
 
 void setLEDBrightness(int brightness) {
-    if (brightness >= 0 && brightness <= 255) {
-        ledcWrite(PWM_CHANNEL, brightness);
-        Serial.print("Brightness Set to: ");
-        Serial.println(brightness);
-    }
+    analogWrite(LED_PIN, brightness);  // Set the brightness using PWM
 }
+
+
+
+
 
 #endif

@@ -3,17 +3,18 @@
 
 #include <WiFi.h>
 
-#define WIFI_SSID "ABC"          // Replace with your Wi-Fi SSID
-#define WIFI_PASSWORD "zzom5037"  // Replace with your Wi-Fi Password
+#define WIFI_SSID "ABC"
+#define WIFI_PASSWORD "zzom5037"
 
 void connectToWiFi() {
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
+
     Serial.print("Connecting to WiFi...");
     while (WiFi.status() != WL_CONNECTED) {
-        Serial.print(".");
         delay(1000);
+        Serial.print(".");
     }
-    Serial.println("\nConnected to WiFi");
+    Serial.println("Connected to WiFi!");
 }
 
 #endif

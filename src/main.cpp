@@ -3,32 +3,73 @@
 #include "firebaseHandler.h"
 #include "ledControl.h"
 #include "moistDevice.h"
-#include "sensorHandler.h"
-#include "sendData.h" // New file for sending data
+#include "dhtsensor.h"
+#include "sendData.h"
+#include "lightsensor.h"
+#include "loadCell.h"
+#include "deviceConfig.h"
+#include "deviceRegistration.h"
+#include <LiquidCrystal_I2C.h> 
+
+LiquidCrystal_I2C lcd(0x27, 16, 2); 
 
 void setup() {
     Serial.begin(115200);
-    connectToWiFi();
-    initializeFirebase();
-    setupLED();
+    connectToWiFi();  // Connect to Wi-Fi
+    initializeFirebase();  // Initialize Firebase
+    
+    // Register device in Firebase
+    registerDevice();
+    
+    // Setup devices
+    setupLED();  // Setup LED control
     setupMoistDevice();
-    setupSensor();
+    setupLightSensor();  // Setup light sensor
+    setupSensor();  // Setup temperature and humidity sensor
+    setupLoadCell();  // Setup load cell sensor
+    
+    // Initialize LCD
+    lcd.init();                      
+    lcd.backlight();
+    lcd.setCursor(0, 0);
+    lcd.print("Device: ");
+    lcd.print(DEVICE_ID);
+    lcd.setCursor(0, 1);
+    lcd.print("Initialized");  
+    
+    Serial.print("Device ");
+    Serial.print(DEVICE_ID);
+    Serial.println(" initialized");
 }
 
 void loop() {
-    int brightness = getBrightness();
-    if (brightness != -1) {
-        setLEDBrightness(brightness);
-    }
+    // Stream data from Firebase using WebSocket
+    streamFirebaseData(); 
 
-    int mistState = getMistState();
-    if (mistState != -1) {
-        controlMoistDevice(mistState);
-    }
-
+    // Read real sensor data
     float temperature = readTemperature();
     float humidity = readHumidity();
-    sendSensorData(temperature, humidity); // Call function from sendData.h
+    float light = readLightIntensity();
+    float compostLevel = readCompostLevel();  // Read compost level from load cell
 
-    delay(5000); // Update every 5 seconds
+    // Send sensor data to Firebase
+    sendSensorData(temperature, humidity, light); 
+    sendCompostLevelData(compostLevel);
+
+    // Display temperature and humidity on the first line of the LCD
+    lcd.setCursor(0, 0);
+    lcd.print("Temp: ");
+    lcd.print(temperature);
+    lcd.print(" C");
+
+    // Display humidity and compost level on the second line of the LCD
+    lcd.setCursor(0, 1);
+    lcd.print("Hum: ");
+    lcd.print(humidity);
+    lcd.print(" %");
+    lcd.print(" Cmp:");
+    lcd.print(compostLevel);
+    lcd.print("%");
+
+    delay(5000);  // Wait for 5 seconds before sending new data
 }
