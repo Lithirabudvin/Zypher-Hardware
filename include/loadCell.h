@@ -13,20 +13,25 @@ HX711 scale;
 void setupLoadCell() {
     Serial.println("Initializing load cell...");
     scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
-    
-    // Calibration factor - you'll need to calibrate this value
-    // This is just an example value, you should calibrate it for your specific setup
-    scale.set_scale(2280.f);  // Adjust this value based on your calibration
-    scale.tare();  // Reset the scale to 0
-    
+    scale.set_scale(2280.f);
+    scale.tare();
     Serial.println("Load cell initialized");
 }
 
 float readCompostLevel() {
-    // Generate random value between 0 and 100 for testing
-    float compostLevel = random(0, 101);
+    // Read the raw value from the load cell
+    float rawReading = scale.get_units(10);  // Average of 10 readings
     
-    Serial.print("Test Compost Level: ");
+    // Convert the raw reading to a percentage
+    float maxWeight = 1000.0;  // Adjust this value based on your setup
+    float compostLevel = (rawReading / maxWeight) * 100.0;
+    
+    // Ensure the value is between 0 and 100
+    compostLevel = constrain(compostLevel, 0.0, 100.0);
+    
+    Serial.print("Raw reading: ");
+    Serial.print(rawReading);
+    Serial.print(" g, Compost level: ");
     Serial.print(compostLevel);
     Serial.println(" %");
     

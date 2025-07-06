@@ -15,21 +15,21 @@ void setupSensor() {
 }
 
 float readTemperature() {
-  float temp = dht.readTemperature(); 
-  if (isnan(temp)) {
+  float temperature = dht.readTemperature(); 
+  if (isnan(temperature)) {
       Serial.println("Failed to read humidity!");
       return -1;
   }
-  return temp;
+  return temperature;
 }
 
 float readHumidity() {
-    float hum = dht.readHumidity();
-    if (isnan(hum)) {
+    float humidity = dht.readHumidity();
+    if (isnan(humidity)) {
         Serial.println("Failed to read humidity!");
         return -1;
     }
-    return hum;
+    return humidity;
 }
 
 #endif

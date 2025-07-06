@@ -9,8 +9,8 @@ void setupMoistDevice() {
     //digitalWrite(MIST_PIN, LOW);  // Set mist device pin as an output
 }
 
-void controlMoistDevice(int state) {
-    if (state == 1) {
+void controlMoistDevice(int moistState) {
+    if (moistState == 1) {
         digitalWrite(MIST_PIN, LOW);
         digitalWrite(MIST_PIN, HIGH);
            // Turn on the mist device

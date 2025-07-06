@@ -7,7 +7,7 @@
 // Hardcoded device ID - Change this for each ESP device
 // For the first ESP device, use "esp1"
 // For the second ESP device, use "esp2"
-#define DEVICE_ID "egg-1"
+#define DEVICE_ID "egg-1234"
 
 // Function to get the device path in Firebase
 String getDevicePath() {
