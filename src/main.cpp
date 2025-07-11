@@ -46,10 +46,11 @@ void loop() {
     // Stream data from Firebase using WebSocket
 
     // Generate random test data
-
+    streamFirebaseData();
     temperature = readTemperature();
     humidity = readHumidity();
     light = readLightIntensity();
+    
    // Read compost level from load cell
     // Print sensor data to Serial Monitor  
     if (temperature != -1 && humidity != -1 && light != -1) {
