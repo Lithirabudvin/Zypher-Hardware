@@ -64,7 +64,7 @@ The ESP board interfaces with the following modules:
 ---
 
 ## Repository Structure
-
+```
 esp-controller/
 ├── src/
 │ ├── main.cpp # Main program logic
@@ -78,9 +78,8 @@ esp-controller/
 ├── README.md # Project documentation
 └── LICENSE # License file
 
-
 ---
-
+```
 ## Setup & Usage
 
 ### Requirements
