@@ -66,15 +66,20 @@ The ESP board interfaces with the following modules:
 ## Repository Structure
 ```
 esp-controller/
+├── include/
+│ ├── connectWifi.h 
+│ ├── deviceConfig.h 
+│ ├── deviceRegistration.h 
+│ ├── dhtsensor.h 
+│ ├── firbaseHandler.h 
+│ ├──  ledControl.h
+│ ├──  lightsensor.h
+│ ├──  loadCell.h
+│ ├──  sendData.h
+│ └──  testData.h
 ├── src/
-│ ├── main.cpp # Main program logic
-│ ├── sensor_readings.cpp # Sensor interfacing code
-│ ├── actuators.cpp # Device control routines
-│ ├── firebase_comm.cpp # WebSocket and Firebase communication handling
-│ └── config.h # Configurations: WiFi credentials, Firebase URLs, unit IDs
-├── include/ # Header files for modules
-├── docs/ # Additional documentation (optional)
-├── platformio.ini # Project configuration (if PlatformIO used)
+│ └── main.cpp
+├── platformio.ini # Project configuration
 ├── README.md # Project documentation
 └── LICENSE # License file
 
