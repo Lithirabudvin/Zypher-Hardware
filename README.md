@@ -132,9 +132,8 @@ Contributions and improvements are welcome! Please follow these guidelines:
 
 ## Acknowledgements
 
-This project is part of the Smart BSF Farming ecosystem developed collaboratively by Team SHOCKERS, complementing the mobile app and hardware units.
+This project is part of the Smart BSF Farming ecosystem developed collaboratively by Team Zypher, complementing the mobile app and hardware units.
 
 ---
 
-*For questions or collaboration, please open an issue or contact the maintainers.*
 
